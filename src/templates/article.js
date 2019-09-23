@@ -1,7 +1,10 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import ReactMarkdown from "react-markdown"
 import Img from "gatsby-image"
 import Layout from "../components/layout"
+
+import "../styles/global.css"
 
 const ArticleTemplate = ({ data }) => (
   <Layout>
@@ -15,7 +18,14 @@ const ArticleTemplate = ({ data }) => (
     {data.strapiArticle.image ? (
       <Img fluid={data.strapiArticle.image.childImageSharp.fluid} />
     ) : null}
-    <p>{data.strapiArticle.content}</p>
+    <ReactMarkdown
+      source={data.strapiArticle.content}
+      transformImageUri={uri =>
+        uri.startsWith("http") ? uri : `${process.env.IMAGE_BASE_URL}${uri}`
+      }
+      className="articleContent"
+      escapeHtml={false}
+    />
   </Layout>
 )
 

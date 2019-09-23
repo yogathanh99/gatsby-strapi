@@ -1,10 +1,13 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import Img from "gatsby-image"
+import ReactMarkdown from "react-markdown"
 
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
+
+import "../styles/global.css"
 
 const IndexPage = ({ data }) => (
   <Layout>
@@ -26,7 +29,17 @@ const IndexPage = ({ data }) => (
           {article.node.image ? (
             <Img fixed={article.node.image.childImageSharp.fixed} />
           ) : null}
-          <p>{article.node.content}</p>
+          <ReactMarkdown
+            source={article.node.content}
+            transformImageUri={uri =>
+              uri.startsWith("http")
+                ? uri
+                : `${process.env.IMAGE_BASE_URL}${uri}`
+            }
+            className="indexArticle"
+            escapeHtml={false}
+          />
+          <Link to={`/articles/${article.node.id}`}>Read more</Link>
         </li>
       ))}
     </ul>

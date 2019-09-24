@@ -29,7 +29,8 @@ const IndexPage = ({ data }) => (
           {article.node.image ? (
             <Img fixed={article.node.image.childImageSharp.fixed} />
           ) : null}
-          <ReactMarkdown
+          <p>{article.node.content}</p>
+          {/* <ReactMarkdown
             source={article.node.content}
             transformImageUri={uri =>
               uri.startsWith("http")
@@ -38,7 +39,7 @@ const IndexPage = ({ data }) => (
             }
             className="indexArticle"
             escapeHtml={false}
-          />
+          /> */}
           <Link to={`/articles/${article.node.id}`}>Read more</Link>
         </li>
       ))}

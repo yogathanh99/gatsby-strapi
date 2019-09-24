@@ -14,7 +14,8 @@ const UserTemplate = ({ data }) => (
           <h2>
             <Link to={`/Article_${article.id}`}>{article.title}</Link>
           </h2>
-          <ReactMarkdown
+          <p>{article.content}</p>
+          {/* <ReactMarkdown
             source={article.content}
             transformImageUri={uri =>
               uri.startsWith("http")
@@ -23,7 +24,7 @@ const UserTemplate = ({ data }) => (
             }
             className="indexArticle"
             escapeHtml={false}
-          />
+          /> */}
           <Link to={`/Article_${article.id}`}>Read more</Link>
         </li>
       ))}
